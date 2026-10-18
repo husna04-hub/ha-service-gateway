@@ -1,0 +1,61 @@
+# Example exposition captured from a local three-phase drill.
+# The in-flight gauge is 1 because this scrape is itself an in-flight request.
+# HELP ha_gateway_requests_total HTTP requests handled by the gateway, by final status and backend.
+# TYPE ha_gateway_requests_total counter
+ha_gateway_requests_total{method="GET",status="200",backend="api-1"} 4
+ha_gateway_requests_total{method="GET",status="200",backend="api-2"} 8
+# HELP ha_gateway_request_duration_seconds End-to-end gateway request latency in seconds.
+# TYPE ha_gateway_request_duration_seconds histogram
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.005"} 3
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.01"} 3
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.025"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.05"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.1"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.25"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="0.5"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="1"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="2.5"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="5"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="10"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-1",le="+Inf"} 4
+ha_gateway_request_duration_seconds_sum{backend="api-1"} 0.0202065999911
+ha_gateway_request_duration_seconds_count{backend="api-1"} 4
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.005"} 5
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.01"} 5
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.025"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.05"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.1"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.25"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="0.5"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="1"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="2.5"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="5"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="10"} 8
+ha_gateway_request_duration_seconds_bucket{backend="api-2",le="+Inf"} 8
+ha_gateway_request_duration_seconds_sum{backend="api-2"} 0.0702129999991
+ha_gateway_request_duration_seconds_count{backend="api-2"} 8
+# HELP ha_gateway_upstream_failures_total Upstream request failures by backend and reason.
+# TYPE ha_gateway_upstream_failures_total counter
+ha_gateway_upstream_failures_total{backend="api-1",reason="status_502"} 1
+# HELP ha_gateway_health_checks_total Active health probes by backend and result.
+# TYPE ha_gateway_health_checks_total counter
+ha_gateway_health_checks_total{backend="api-1",result="fail"} 2
+ha_gateway_health_checks_total{backend="api-1",result="ok"} 4
+ha_gateway_health_checks_total{backend="api-2",result="ok"} 6
+# HELP ha_gateway_backend_health_transitions_total Backend health state transitions.
+# TYPE ha_gateway_backend_health_transitions_total counter
+ha_gateway_backend_health_transitions_total{backend="api-1",state="healthy"} 1
+ha_gateway_backend_health_transitions_total{backend="api-1",state="unhealthy"} 1
+# HELP ha_gateway_failovers_total Requests retried against a different backend.
+# TYPE ha_gateway_failovers_total counter
+ha_gateway_failovers_total{from_backend="api-1",to_backend="api-2"} 1
+# HELP ha_gateway_backend_up Whether a backend is currently healthy (1) or unhealthy (0).
+# TYPE ha_gateway_backend_up gauge
+ha_gateway_backend_up{backend="api-1"} 1
+ha_gateway_backend_up{backend="api-2"} 1
+# HELP ha_gateway_inflight_requests Requests currently being handled by the gateway.
+# TYPE ha_gateway_inflight_requests gauge
+ha_gateway_inflight_requests 1
+# HELP ha_gateway_ready Whether at least one healthy backend is available (1) or not (0).
+# TYPE ha_gateway_ready gauge
+ha_gateway_ready 1
